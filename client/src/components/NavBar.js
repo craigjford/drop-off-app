@@ -15,18 +15,13 @@ const navStyles = ({ isActive }) => {
 
 function NavBar({ loggedIn }) {
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate;
 
   const handleLogoutClick = () => {
     fetch("/logout", 
     { method: "DELETE" })
     .then((r) => {
       if (r.ok) {
-        dispatch(userReset());
-        dispatch(carReset());
-        dispatch(dealerReset());
-        dispatch(mydealerReset());
-        dispatch(repairReset())
         navigate('/');
       }
     });
@@ -35,28 +30,25 @@ function NavBar({ loggedIn }) {
   return (
     <header>
       <div className="navbar">
-        {loggedIn ? (
-          <>
+      {loggedIn ? (
+        <>
           <NavLink to="/" exact="true" style={navStyles}>Home</NavLink>
-          <NavLink to="/mycars" style={navStyles}>My Cars</NavLink>
-          <NavLink to="/repairs" style={navStyles}>My Repairs</NavLink>
-          <NavLink to="/mydealers" style={navStyles}>My Dealers</NavLink>
-          <NavLink to="/dealers" style={navStyles}>All Dealers</NavLink>
           <button className="navbar-btn" onClick={handleLogoutClick}>Logout</button>
           <hr />
           <br />
-          </>
-        ) : (
-          <>
-          <NavLink to="/" exact="true" style={navStyles}>Home</NavLink>
-          <NavLink to="/login" style={navStyles}>Log In</NavLink>
-          <NavLink to="/signup" style={navStyles}>Sign Up</NavLink>  
-          <hr />
-          </>
-        )}
+        </>
+      ) : (
+      <>
+        <NavLink to="/" exact="true" style={navStyles}>Home</NavLink>
+        <NavLink to="/login" style={navStyles}>Log In</NavLink>
+        <NavLink to="/signup" style={navStyles}>Sign Up</NavLink>  
+        <hr />
+      </>
+      )}
       </div>
     </header>
   );
 }
 
-export default NavBar
+export default NavBar;
+

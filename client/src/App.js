@@ -42,7 +42,7 @@ function App() {
       <NavBar loggedIn={loggedIn} />
         {loggedIn ? (
           <Routes>
-            <Route exact="true" path="/" element={<Home isHome={isTrue} />} />
+            <Route exact="true" path="/" element={<Home isHome={isTrue} loggedIn={loggedIn} />} />
             <Route path="/customers" element={<CustomerList customers={customers} />} />  
             <Route path="*" element={<Home patch="*" isHome={!isTrue}/>} />
           </Routes>

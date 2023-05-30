@@ -1,11 +1,6 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 
-const Home = ({ isHome }) => {
-
-  const user = useSelector((state) => state.user.entities);
-
-  const loggedIn = useSelector((state) => state.user.loggedIn);
+const Home = ({ isHome, loggedIn }) => {
 
   if (!loggedIn) return <h1 className="App">Home Page - Please Login or Sign Up</h1>;
 
@@ -13,9 +8,9 @@ const Home = ({ isHome }) => {
       <div>
         {isHome  ? (
           <>
-            <h1 className="App">Welcome {user.first_name} {user.last_name} to Your Car Repository Home Page!</h1>
+            {/* <h1 className="App">Welcome {user.first_name} {user.last_name} to Your Car Repository Home Page!</h1> */}
             <br />
-            <h2 className="App">UserName: {user.username}</h2>
+            {/* <h2 className="App">UserName: {user.username}</h2> */}
             <br />
             <hr />
             <br />
