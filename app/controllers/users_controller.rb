@@ -16,11 +16,12 @@ class UsersController < ApplicationController
     def create  
         user = User.create!(user_params)
         session[:user_id] = user.id
-        current_user = user
         render json: user, status: :created
     end
 
     def user_by_phone_number
+
+        #  Tom, I know this is a bit hockey, but I struggled to find a cleaner way to see if a string is numeric
 
         input = params[:id]
         input_length = input.length
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
         if is_integer
             users = User.where("phone LIKE ?", "#{input}%") 
             if users.count > 0
-                render json: users, status: :ok 
+                render json: users, include: :transactions,  status: :ok
             else
                 render json: { message: "No Users Fit That Criteria"}, status: :not_found    
             end
@@ -53,8 +54,9 @@ class UsersController < ApplicationController
 
     private
 
-    def user_params              
-        params.require(:user).permit(:username, :password, :password_confirmation, :store_name, :address, :city, :phone)
-    end 
+    def user_params            
+        byebug  
+        params.permit(:username, :password, :password_confirmation, :store_name, :address, :city, :phone)
+    end
 
 end
